@@ -1,0 +1,8 @@
+Time accounting
+Day		Time	What did I do
+7 Nov		3 hr	Select the project, decide the major project components and their relation
+8 Nov		4 hr	Decide properties and types for mongoDb, prepare workflow
+9 Nov		3 hr	Prepare frontend design
+10 Nov		4 hr 	Project basic setup with Vite and typescript, setup backend server and make database connection with MongoDb
+11 Nov		3 hr	create router, controller and model for product, place seeding data with postman
+12 Nov		4 hr	Manage error handling for async request, user model added
