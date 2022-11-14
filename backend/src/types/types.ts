@@ -5,18 +5,18 @@ export interface IProduct extends Document {
   name: string;
   description: string;
   price: number;
-  ratings: number;
-  images: Image[];
+  ratings?: number;
+  images?: Image[];
   category: string;
   Stock: number;
-  noOfReviews: number;
-  reviews: User[];
+  numOfReviews?: number;
+  reviews?: User[];
   user: Types.ObjectId;
   createdAt: Date;
 }
 type User = {
-  user: Types.ObjectId;
-  name: string;
+  user: string | unknown;
+  name?: string;
   rating: number;
   comment: string;
 };
@@ -30,7 +30,7 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  avatar: Avatar;
+  avatar?: Avatar;
   role: string;
   createdAt: Date;
   resetPasswordToken?: string;
