@@ -48,8 +48,7 @@ const productSchema = new Schema({
   reviews: [
     {
       user: {
-        type: Types.ObjectId,
-        ref: "User",
+        type: String,
         required: true,
       },
       name: {
@@ -69,7 +68,6 @@ const productSchema = new Schema({
   user: {
     type: Types.ObjectId,
     ref: "User",
-    required: true,
   },
   createdAt: {
     type: Date,

@@ -11,11 +11,11 @@ export interface IProduct extends Document {
   Stock: number;
   numOfReviews?: number;
   reviews?: User[];
-  user: Types.ObjectId;
+  user?: Types.ObjectId;
   createdAt: Date;
 }
 type User = {
-  user: string | unknown;
+  user: string;
   name?: string;
   rating: number;
   comment: string;
@@ -26,7 +26,7 @@ type Image = {
 };
 
 // ============= User type =======
-export interface IUser extends Document {
+interface UserModel {
   name: string;
   email: string;
   password: string;
@@ -36,7 +36,11 @@ export interface IUser extends Document {
   resetPasswordToken?: string;
   resetPasswordExpire?: Date;
 }
-
+export interface IUser extends UserModel, Document {
+  comparePassword: (password: string) => Promise<boolean>;
+  getJWTToken: () => Promise<string>;
+  getResetPasswordToken: () => Promise<string>;
+}
 type Avatar = {
   public_id: string;
   url: string;

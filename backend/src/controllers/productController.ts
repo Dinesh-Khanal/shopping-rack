@@ -164,15 +164,20 @@ export const deleteProduct = asyncHandler(
 );
 
 // Create New Review or Update the review
+interface Body {
+  rating: string;
+  comment: string;
+  productId: string;
+}
 export const createProductReview = asyncHandler(
   async (req: Request, res: Response) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const { rating, comment, productId } = req.body;
-
+    const { rating, comment, productId } = req.body as Body;
+    if (req.userId === undefined || typeof comment !== "string") {
+      throw new AppError("Invalid request", 404);
+    }
     const review = {
       user: req.userId,
       rating: Number(rating),
-      // eslint-disable-next-line
       comment,
     };
 
@@ -181,13 +186,13 @@ export const createProductReview = asyncHandler(
       throw new AppError("No review found", 404);
     }
     const isReviewed = product.reviews.find(
-      (rev) => rev.user === req.userId?.toString()
+      (rev) => rev.user.toString() === req.userId?.toString()
     );
 
     if (isReviewed) {
       product.reviews.forEach((rev) => {
-        if (rev.user === req.userId?.toString())
-          (rev.rating = rating as number), (rev.comment = comment as string);
+        if (rev.user.toString() === req.userId?.toString())
+          (rev.rating = Number(rating)), (rev.comment = comment);
       });
     } else {
       product.reviews.push(review);
