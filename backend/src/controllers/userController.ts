@@ -86,7 +86,8 @@ export const forgotPassword = asyncHandler(async (req, res, next) => {
     user.resetPasswordExpire = undefined;
 
     await user.save({ validateBeforeSave: false });
-    return next(new AppError("Unknown email error", 500));
+
+    return next(new AppError(error as string, 500));
   }
 });
 

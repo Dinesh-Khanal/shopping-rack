@@ -8,6 +8,7 @@ const sendToken = async (user: IUser, statusCode: number, res: Response) => {
     //   Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
     // ),
     httpOnly: true,
+    secure: false,
     //secure: true, //this secure option is only in production where https applied
     sameSite: "none",
     maxAge: 24 * 60 * 60 * 1000,

@@ -1,24 +1,26 @@
-import nodeMailer, { TransportOptions } from "nodemailer";
-//First create an account in Sendinblue (https://sendinblue.com) for SMTP credentials
-interface IOption {
+import nodeMailer from "nodemailer";
+
+const sendEmail = async (options: {
   email: string;
   subject: string;
   message: string;
-}
-const sendEmail = async (options: IOption) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+}) => {
   const transporter = nodeMailer.createTransport({
-    host: process.env.SMPT_HOST,
-    port: process.env.SMPT_PORT,
-    service: process.env.SMPT_SERVICE,
+    service: "Gmail",
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT),
+    secure: false,
     auth: {
-      user: process.env.SMPT_MAIL,
-      pass: process.env.SMPT_PASSWORD,
+      user: process.env.SMTP_MAIL,
+      pass: process.env.SMTP_PASSWORD,
     },
-  } as TransportOptions);
-
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+  console.log(process.env.SMTP_HOST);
   const mailOptions = {
-    from: process.env.SMPT_MAIL,
+    from: process.env.SMTP_MAIL,
     to: options.email,
     subject: options.subject,
     text: options.message,
