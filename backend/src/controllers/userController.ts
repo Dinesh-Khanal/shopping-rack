@@ -73,7 +73,7 @@ export const forgotPassword = asyncHandler(async (req, res, next) => {
   try {
     await sendEmail({
       email: user.email,
-      subject: `Ecommerce Password Recovery`,
+      subject: `Shopping-rack Password Recovery`,
       message,
     });
 
@@ -111,7 +111,7 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
   }
 
   if (req.body.password !== req.body.confirmPassword) {
-    return next(new AppError("Password does not password", 400));
+    return next(new AppError("Password does not match", 400));
   }
 
   user.password = req.body.password as string;

@@ -9,7 +9,7 @@ const sendEmail = async (options: {
     service: "Gmail",
     host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT),
-    secure: false,
+    secure: false, //this is for port 587 (ie not secure http), for port 465 (https) it should be true
     auth: {
       user: process.env.SMTP_MAIL,
       pass: process.env.SMTP_PASSWORD,
