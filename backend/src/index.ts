@@ -1,6 +1,7 @@
 import app from "./app";
 import dotenv from "dotenv";
 import dbConnect from "./config/database";
+import { v2 as cloudinary } from "cloudinary";
 
 // Handling Uncaught Exception
 process.on("uncaughtException", (err: Error) => {
@@ -12,6 +13,12 @@ process.on("uncaughtException", (err: Error) => {
 if (process.env.NODE_ENV !== "PRODUCTION") {
   dotenv.config({ path: "./src/config/config.env" });
 }
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 dbConnect();
 

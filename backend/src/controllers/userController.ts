@@ -5,10 +5,31 @@ import asyncHandler from "express-async-handler";
 import sendToken from "../utils/sendToken";
 import crypto from "crypto";
 import sendEmail from "../utils/sendEmail";
+import { v2 as cloudinary } from "cloudinary";
 
+interface UserBody {
+  name: string;
+  email: string;
+  password: string;
+  avatar: string;
+}
 export const registerUser = asyncHandler(
   async (req: Request, res: Response) => {
-    const user = await User.create(req.body);
+    const { name, email, password, avatar } = req.body as UserBody;
+    const myCloud = await cloudinary.uploader.upload(avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+    const user = await User.create({
+      name,
+      email,
+      password,
+      avatar: {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      },
+    });
     if (user) {
       await sendToken(user, 200, res);
     } else {
@@ -16,12 +37,12 @@ export const registerUser = asyncHandler(
     }
   }
 );
-interface Body {
+interface LoginBody {
   email: string;
   password: string;
 }
 export const login = asyncHandler(async (req: Request, res: Response) => {
-  const { email, password } = req.body as Body;
+  const { email, password } = req.body as LoginBody;
 
   if (typeof email !== "string" || typeof password !== "string") {
     throw new AppError("Please enter valid email and password!", 400);
