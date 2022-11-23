@@ -3,10 +3,12 @@ import product from "./routes/productRoute";
 import user from "./routes/userRoute";
 import errorHandler from "./middlewares/errorHandler";
 import cookieParser from "cookie-parser";
-
+import fileUpload from "express-fileupload";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+app.use(fileUpload());
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 app.use(cookieParser());
 
