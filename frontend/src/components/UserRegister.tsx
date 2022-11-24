@@ -38,7 +38,7 @@ const UserRegister = () => {
     myForm.set('password', user.password);
     myForm.set('avatar', avatar);
     const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-    const { data } = await axios.post(`/api/v1/register`, myForm, config);
+    const { data } = await axios.post(`/api/register`, myForm, config);
     console.log(data);
     setUser({
       name: '',

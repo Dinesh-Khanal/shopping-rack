@@ -4,9 +4,13 @@ import user from "./routes/userRoute";
 import errorHandler from "./middlewares/errorHandler";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
+import cors from "./middlewares/cors";
 const app = express();
+
+app.use(cors);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 app.use(fileUpload());
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call

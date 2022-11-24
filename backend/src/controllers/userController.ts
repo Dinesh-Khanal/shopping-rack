@@ -274,10 +274,10 @@ export const deleteUser = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // const imageId = user.avatar.public_id;
-
-  // await cloudinary.v2.uploader.destroy(imageId);
-
+  const imageId = user.avatar?.public_id;
+  if (imageId) {
+    await cloudinary.uploader.destroy(imageId);
+  }
   await user.remove();
 
   res.status(200).json({
