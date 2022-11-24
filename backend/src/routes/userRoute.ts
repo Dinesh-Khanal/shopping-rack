@@ -7,14 +7,13 @@ import {
   resetPassword,
   getUserDetails,
   updatePassword,
-  //   updateProfile,
+  updateProfile,
   getAllUser,
   getSingleUser,
   updateUserRole,
   deleteUser,
 } from "../controllers/userController";
 import isAuthenticated from "../middlewares/auth";
-//const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -33,7 +32,7 @@ router.route("/me").get(isAuthenticated, getUserDetails);
 
 router.route("/password/update").put(isAuthenticated, updatePassword);
 
-// router.route("/me/update").put(isAuthenticated, updateProfile);
+router.route("/me/update").put(isAuthenticated, updateProfile);
 
 router.route("/admin/users").get(isAuthenticated, getAllUser);
 

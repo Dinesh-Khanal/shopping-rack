@@ -179,38 +179,46 @@ export const updatePassword = asyncHandler(async (req, res, next) => {
 });
 
 // update User Profile
-// export const updateProfile = asyncHandler(async (req, res, next) => {
-//   const newUserData = {
-//     name: req.body.name,
-//     email: req.body.email,
-//   };
-//   if (req.body.avatar !== "") {
-//     const user = await User.findById(req.userId);
+export const updateProfile = asyncHandler(async (req, res) => {
+  const { name, email, avatar } = req.body as UserBody;
+  const newUserData: {
+    name: string;
+    email: string;
+    avatar?: { public_id: string; url: string };
+  } = {
+    name,
+    email,
+  };
+  if (avatar !== "") {
+    const user = await User.findById(req.userId);
+    if (user) {
+      const imageId = user.avatar?.public_id;
+      if (imageId) {
+        await cloudinary.uploader.destroy(imageId);
+      }
+    }
 
-//     const imageId = user.avatar.public_id;
+    const myCloud = await cloudinary.uploader.upload(avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+    newUserData.avatar = {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    };
+  }
 
-//     await cloudinary.v2.uploader.destroy(imageId);
+  const user = await User.findByIdAndUpdate(req.userId, newUserData, {
+    new: true,
+    runValidators: true,
+  });
 
-//     const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-//       folder: "avatars",
-//       width: 150,
-//       crop: "scale",
-//     });
-//     newUserData.avatar = {
-//       public_id: myCloud.public_id,
-//       url: myCloud.secure_url,
-//     };
-//   }
-
-//   const user = await User.findByIdAndUpdate(req.userId, newUserData, {
-//     new: true,
-//     runValidators: true,
-//   });
-
-//   res.status(200).json({
-//     success: true,
-//   });
-// });
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
 
 // Get all users(admin)
 export const getAllUser = asyncHandler(async (_req, res) => {
@@ -253,9 +261,8 @@ export const updateUserRole = asyncHandler(
     };
 
     await User.findByIdAndUpdate(req.params.id, newUserData, {
-      new: true,
+      new: true, // if true, return the modified document rather than the original
       runValidators: true,
-      useFindAndModify: false,
     });
 
     res.status(200).json({
