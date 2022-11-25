@@ -6,3 +6,10 @@ Day		Time	What did I do
 10 Nov		4 hr 	Project basic setup with Vite and typescript, setup backend server and make database connection with MongoDb
 11 Nov		3 hr	create router, controller and model for product, place seeding data with postman
 12 Nov		4 hr	Manage error handling for async request, user model added
+13 Nov      2 hr    Some refactoring and fixed typescript error
+14 Nov      4 hr    Product route and Product controller with some basic method(create product, get all product, get admin product, get product details) added
+17 Nov      6 hr    User model, User route, User controller and user authentication(backend) with middleware function added
+19 Nov      3 hr    Email sending feature added, provision made for forget password (creating token and sending email link)
+21 Nov      4 hr    Password reset, password update and role update added, image upload feature added for avatar image
+23 Nov      3 hr    User registration component with avatar image in frontend completed(without styling)
+24 Nov      3 hr    Cors added, image upload error fixed, user profile update completed

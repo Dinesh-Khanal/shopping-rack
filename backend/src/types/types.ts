@@ -45,3 +45,38 @@ type Avatar = {
   public_id: string;
   url: string;
 };
+
+//=========== Product type ========================
+type ShippingInfo = {
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  pinCode: number;
+  phoneNo: string;
+};
+
+type OrderItem = {
+  name: string;
+  price: number;
+  quantity: number;
+  image: string;
+  product: Types.ObjectId;
+};
+export interface IOrder extends Document {
+  shippingInfo: ShippingInfo;
+  orderItems: OrderItem[];
+  user: Types.ObjectId;
+  paymentInfo: {
+    id: string;
+    status: string;
+  };
+  paidAt: Date;
+  itemsPrice: number;
+  taxPrice: number;
+  shippingPrice: number;
+  totalPrice: number;
+  orderStatus: string;
+  deliveredAt: Date;
+  createdAt: Date;
+}

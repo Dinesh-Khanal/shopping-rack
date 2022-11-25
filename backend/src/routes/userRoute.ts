@@ -13,7 +13,7 @@ import {
   updateUserRole,
   deleteUser,
 } from "../controllers/userController";
-import isAuthenticated from "../middlewares/auth";
+import { isAuthenticated } from "../middlewares/auth";
 
 const router = express.Router();
 

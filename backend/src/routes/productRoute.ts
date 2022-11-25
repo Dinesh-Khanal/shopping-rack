@@ -7,16 +7,23 @@ import {
   updateProduct,
   deleteProduct,
 } from "../controllers/productController";
-import isAuthenticated from "../middlewares/auth";
+import { isAuthenticated, authorizeRoles } from "../middlewares/auth";
 const router = express.Router();
 
 router.get("/products", getAllProducts);
-router.get("/admin/products", isAuthenticated, getAdminProducts);
-router.route("/admin/product/new").post(isAuthenticated, createProduct);
+router.get(
+  "/admin/products",
+  isAuthenticated,
+  authorizeRoles("admin"),
+  getAdminProducts
+);
+router
+  .route("/admin/product/new")
+  .post(isAuthenticated, authorizeRoles("admin"), createProduct);
 router.route("/product/:id").get(getProductDetails);
 router
   .route("/admin/product/:id")
-  .put(isAuthenticated, updateProduct)
-  .delete(isAuthenticated, deleteProduct);
+  .put(isAuthenticated, authorizeRoles("admin"), updateProduct)
+  .delete(isAuthenticated, authorizeRoles("admin"), deleteProduct);
 
 export default router;
