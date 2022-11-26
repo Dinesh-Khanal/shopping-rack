@@ -43,7 +43,7 @@ export const createProduct = asyncHandler(
     }
 
     req.body.images = imagesLinks;
-    req.body.user = req.userId;
+    req.body.user = req.user?._id as string;
 
     const product = await Product.create(req.body);
     if (product) {
@@ -122,12 +122,10 @@ export const updateProduct = asyncHandler(
 
       req.body.images = imagesLinks;
     }
-
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
-      useFindAndModify: false,
     });
 
     res.status(200).json({
@@ -172,11 +170,11 @@ interface Body {
 export const createProductReview = asyncHandler(
   async (req: Request, res: Response) => {
     const { rating, comment, productId } = req.body as Body;
-    if (req.userId === undefined || typeof comment !== "string") {
+    if (req.user === undefined || typeof comment !== "string") {
       throw new AppError("Invalid request", 404);
     }
     const review = {
-      user: req.userId,
+      user: req.user?._id as string,
       rating: Number(rating),
       comment,
     };
@@ -186,12 +184,12 @@ export const createProductReview = asyncHandler(
       throw new AppError("No review found", 404);
     }
     const isReviewed = product.reviews.find(
-      (rev) => rev.user.toString() === req.userId?.toString()
+      (rev) => rev.user.toString() === (req.user?._id as string)
     );
 
     if (isReviewed) {
       product.reviews.forEach((rev) => {
-        if (rev.user.toString() === req.userId?.toString())
+        if (rev.user.toString() === (req.user?._id as string))
           (rev.rating = Number(rating)), (rev.comment = comment);
       });
     } else {

@@ -13,7 +13,7 @@ import {
   updateUserRole,
   deleteUser,
 } from "../controllers/userController";
-import { isAuthenticated } from "../middlewares/auth";
+import { isAuthenticated, authorizeRoles } from "../middlewares/auth";
 
 const router = express.Router();
 
@@ -34,12 +34,14 @@ router.route("/password/update").put(isAuthenticated, updatePassword);
 
 router.route("/me/update").put(isAuthenticated, updateProfile);
 
-router.route("/admin/users").get(isAuthenticated, getAllUser);
+router
+  .route("/admin/users")
+  .get(isAuthenticated, authorizeRoles("admin"), getAllUser);
 
 router
   .route("/admin/user/:id")
-  .get(isAuthenticated, getSingleUser)
-  .put(isAuthenticated, updateUserRole)
-  .delete(isAuthenticated, deleteUser);
+  .get(isAuthenticated, authorizeRoles("admin"), getSingleUser)
+  .put(isAuthenticated, authorizeRoles("admin"), updateUserRole)
+  .delete(isAuthenticated, authorizeRoles("admin"), deleteUser);
 
 export default router;

@@ -145,8 +145,8 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
 });
 
 // Get User Detail
-export const getUserDetails = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.userId);
+export const getUserDetails = asyncHandler((req, res) => {
+  const user = req.user;
   res.status(200).json({
     success: true,
     user,
@@ -155,7 +155,7 @@ export const getUserDetails = asyncHandler(async (req, res) => {
 
 // update User password
 export const updatePassword = asyncHandler(async (req, res, next) => {
-  const user = await User.findById(req.userId).select("+password");
+  const user = await User.findById(req.user?._id).select("+password");
   if (!user) {
     throw new AppError("User not found", 400);
   }
@@ -190,7 +190,7 @@ export const updateProfile = asyncHandler(async (req, res) => {
     email,
   };
   if (avatar !== "") {
-    const user = await User.findById(req.userId);
+    const user = req.user;
     if (user) {
       const imageId = user.avatar?.public_id;
       if (imageId) {
@@ -209,7 +209,7 @@ export const updateProfile = asyncHandler(async (req, res) => {
     };
   }
 
-  const user = await User.findByIdAndUpdate(req.userId, newUserData, {
+  const user = await User.findByIdAndUpdate(req.user?._id, newUserData, {
     new: true,
     runValidators: true,
   });
