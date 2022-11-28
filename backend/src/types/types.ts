@@ -46,7 +46,7 @@ type Avatar = {
   url: string;
 };
 
-//=========== Product type ========================
+//=========== Order type ========================
 type ShippingInfo = {
   address: string;
   city: string;

@@ -3,14 +3,33 @@ import Product from "../models/productModel";
 import asyncHandler from "express-async-handler";
 import cloudinary from "cloudinary";
 import AppError from "../utils/appError";
+import ApiFeatures from "../utils/apiFeatures";
+import { QueryStrType, QueryType } from "../utils/apiFeatures";
 
 export const getAllProducts = asyncHandler(
-  async (_req: Request, res: Response) => {
-    const products = await Product.find();
+  async (req: Request, res: Response) => {
+    const resultPerPage = 8;
+    const productsCount = await Product.countDocuments();
+    const apiFeature = new ApiFeatures(
+      Product.find() as QueryType,
+      req.query as QueryStrType
+    )
+      .search()
+      .filter();
+
+    let products = await apiFeature.query;
+
+    const filteredProductsCount = products.length;
+
+    apiFeature.pagination(resultPerPage);
+    products = await apiFeature.query.clone();
     if (products) {
       res.status(200).json({
-        status: "success",
+        success: true,
         products,
+        productsCount,
+        resultPerPage,
+        filteredProductsCount,
       });
     } else {
       throw new AppError("Products not found", 500);

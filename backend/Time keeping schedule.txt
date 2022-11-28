@@ -13,3 +13,4 @@ Day		Time	What did I do
 21 Nov      4 hr    Password reset, password update and role update added, image upload feature added for avatar image
 23 Nov      3 hr    User registration component with avatar image in frontend completed(without styling)
 24 Nov      3 hr    Cors added, image upload error fixed, user profile update completed
+26 Nov      5 hr    Order model, Order route and Order controller along with required method added
