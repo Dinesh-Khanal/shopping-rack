@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const dbConnect = () => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   mongoose
