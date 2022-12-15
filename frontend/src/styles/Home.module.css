@@ -1,0 +1,13 @@
+.home {
+  display: flex;
+}
+.category {
+  width: 15%;
+  min-width: 150px;
+  border-right: 1px solid black;
+  padding: 1rem;
+}
+.product_list {
+  width: 70%;
+  padding: 1rem;
+}

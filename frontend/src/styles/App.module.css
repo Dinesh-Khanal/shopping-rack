@@ -57,17 +57,17 @@ nav .search_box input {
   border: none;
   border-radius: 5px 0 0 5px;
   outline: none;
-  background: #fff;
+  background-color: var(--lightBg);
   height: 100%;
   padding: 0 10px;
   font-size: 20px;
-  width: 350px;
+  width: 400px;
 }
 
 nav .search_box span {
   color: #0a5071;
   font-size: 20px;
-  background: #fff;
+  background-color: var(--lightBg);
   border-radius: 0 5px 5px 0;
   height: 100%;
   padding: 3px 8px;
@@ -167,7 +167,6 @@ input[type='checkbox'] {
 }
 section {
   position: relative;
-  background-color: var(--lightBg);
   min-height: 80vh;
   width: 100%;
   z-index: -1;
