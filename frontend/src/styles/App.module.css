@@ -170,7 +170,7 @@ section {
   min-height: 80vh;
   width: 100%;
   z-index: -1;
-  filter: brightness(80%);
+  /* filter: brightness(80%); */
 }
 
 footer {

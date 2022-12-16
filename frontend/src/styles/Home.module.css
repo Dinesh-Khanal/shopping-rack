@@ -8,6 +8,15 @@
   padding: 1rem;
 }
 .product_list {
-  width: 70%;
+  width: 100%;
   padding: 1rem;
+  padding-right: 0;
+}
+.product_list ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }

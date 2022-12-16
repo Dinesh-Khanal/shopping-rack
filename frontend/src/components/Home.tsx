@@ -1,5 +1,6 @@
 import { IProductState } from '../redux/productSlice';
 import styles from '../styles/Home.module.css';
+import Product from './Product';
 interface IProps {
   productState: IProductState;
 }
@@ -14,7 +15,9 @@ const Home = ({ productState }: IProps) => {
         <h1>Products</h1>
         <ul>
           {product_data.products.map((product) => (
-            <li key={product._id}>{product.name}</li>
+            <li key={product._id}>
+              <Product product={product} />
+            </li>
           ))}
         </ul>
       </div>
