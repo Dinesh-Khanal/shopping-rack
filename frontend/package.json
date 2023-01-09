@@ -8,11 +8,19 @@
     "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
     "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
     "lint": "yarn lint:format && yarn lint:fix ",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "test": "jest"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-typescript": "^7.15.0",
     "@reduxjs/toolkit": "^1.9.1",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.1",
+    "@testing-library/user-event": "^13.2.1",
     "axios": "^1.2.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.2.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.7.1",
@@ -20,6 +28,7 @@
     "react-router-dom": "^6.4.5"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.14.5",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
@@ -38,5 +47,14 @@
     "vite": "^2.9.12"
   },
   "pre-commit": "lint",
-  "license": "MIT"
+  "license": "MIT",
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest-setup.ts"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
+  }
 }
