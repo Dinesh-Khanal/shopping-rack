@@ -8,7 +8,7 @@
     "dev": "ts-node-dev src/index.ts",
     "lint": "eslint --ext .ts .",
     "start": "node build/index.js",
-    "test": "jest"
+    "test": "jest --watch --detectOpenHandles"
   },
   "keywords": [],
   "author": "Dinesh-Khanal",
@@ -43,6 +43,7 @@
     "express-async-handler": "^1.2.0",
     "express-fileupload": "^1.4.0",
     "jsonwebtoken": "^8.5.1",
+    "mongodb-memory-server": "^8.11.0",
     "mongoose": "^6.7.2",
     "nodemailer": "^6.8.0",
     "validator": "^13.7.0"
