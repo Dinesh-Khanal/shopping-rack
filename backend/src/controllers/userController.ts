@@ -43,7 +43,7 @@ interface LoginBody {
 }
 export const login = asyncHandler(async (req: Request, res: Response) => {
   const { email, password } = req.body as LoginBody;
-
+  console.log(typeof email);
   if (typeof email !== "string" || typeof password !== "string") {
     throw new AppError("Please enter valid email and password!", 400);
   }
