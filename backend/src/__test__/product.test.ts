@@ -34,7 +34,6 @@ describe("product router", () => {
     });
     it("should return a 200 status and the product detail", async () => {
       const product = await Product.create(productPayload);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       const { _body, statusCode } = await request(app).get(
         `/api/product/${product._id}`
