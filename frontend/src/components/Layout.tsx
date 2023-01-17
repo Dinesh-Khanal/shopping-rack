@@ -1,7 +1,7 @@
-/* eslint-disable simple-import-sort/imports */
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
-import { FaBars, FaTimes, FaSearch } from 'react-icons/fa';
+import { FaBars, FaSearch, FaTimes } from 'react-icons/fa';
+import { Link, Outlet } from 'react-router-dom';
+
 import styles from '../styles/App.module.css';
 const Layout = () => {
   return (

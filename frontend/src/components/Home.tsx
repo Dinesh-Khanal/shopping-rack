@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { IProductState } from '../redux/productSlice';
 import styles from '../styles/Home.module.css';
 import Product from './Product';
