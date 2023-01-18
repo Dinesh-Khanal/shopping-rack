@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IProduct } from '../redux/types';
+import { IProduct } from '../../redux/types';
 import styles from '../styles/Product.module.css';
 type IProps = {
   product: IProduct;

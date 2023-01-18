@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { IProductState } from '../redux/productSlice';
+import { IProductState } from '../../redux/productSlice';
+import Product from '../Product/Product';
 import styles from '../styles/Home.module.css';
-import Product from './Product';
 interface IProps {
   productState: IProductState;
 }
