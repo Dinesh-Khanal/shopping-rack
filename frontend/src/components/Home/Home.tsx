@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IProductState } from '../../redux/productSlice';
 import Product from '../Product/Product';
-import styles from '../styles/Home.module.css';
+import styles from './Home.module.css';
 interface IProps {
   productState: IProductState;
 }

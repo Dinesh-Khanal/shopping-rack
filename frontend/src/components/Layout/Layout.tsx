@@ -2,7 +2,7 @@ import React from 'react';
 import { FaBars, FaSearch, FaTimes } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
 
-import styles from '../styles/App.module.css';
+import styles from './App.module.css';
 const Layout = () => {
   return (
     <main className={styles.container}>
@@ -22,7 +22,7 @@ const Layout = () => {
             <Link to="/">home</Link>
           </li>
           <li>
-            <Link to="/">contacts</Link>
+            <Link to="/contact">contacts</Link>
           </li>
           <li>
             <Link to="/">about</Link>

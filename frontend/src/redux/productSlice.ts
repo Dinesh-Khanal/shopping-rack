@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import API from './api';
-import { IProduct } from './types';
+import { IProduct } from '../types/productTypes';
 
 type ProductData = {
   success: boolean;
