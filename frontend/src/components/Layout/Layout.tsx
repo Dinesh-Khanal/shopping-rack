@@ -3,6 +3,7 @@ import { FaBars, FaSearch, FaTimes } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
 
 import styles from './App.module.css';
+import Footer from './Footer/Footer';
 const Layout = () => {
   return (
     <main className={styles.container}>
@@ -25,7 +26,7 @@ const Layout = () => {
             <Link to="/contact">contacts</Link>
           </li>
           <li>
-            <Link to="/">about</Link>
+            <Link to="/about">about</Link>
           </li>
           <li>
             <Link to="/">login</Link>
@@ -37,7 +38,7 @@ const Layout = () => {
         </label>
       </nav>
       <Outlet />
-      <footer>This is footer section</footer>
+      <Footer />
     </main>
   );
 };
